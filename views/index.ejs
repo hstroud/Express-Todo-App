@@ -3,61 +3,63 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="/css/styles.css" rel="stylesheet" type = "text/css"> 
+        
         <title>ToDO APP</title>
-
-        <style type="text/css">
-            body {
-                background-color: #555;
-                color: white;
-            }
-            h2 {
-                margin-top: 10rem;
-            }
-
-            form {
-                margin-bottom: 2rem;
-            }
-
-            ul {
-               list-style-type: none;
-               padding-top: 20px; 
-            }
-
-            li {
-                padding-left: 20px;
-            }
-        </style>
     </head>
     
     <body>
         <!-- navbar -->
-        <nav class="navbar navbar-dark bg-dark" style="background-color: #e3f2fd;">
-            <a class="navbar-brand" href="#">
-                <i class="fa fa-check-circle"></i>
-                TodoList
-            </a>
+        <nav>
+            <a>TodoList</a>
         </nav>
 
-        <!-- input form -->
-        <div class="container">
-            <row>
-                <h1 class="text-center">Enter Todo Item</h1>
-                <form class="col-6 mx-auto" action="/newtodo"  method="POST">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="item" placeholder="Enter Todo Item"
-                        value="this is a new todo list item"><span><button type="submit" class="btn btn-primary">Submit</button></span>
-                    </div>
-                </form>
-            </row>
-            <div class="row">
-                <ul class="col-6 mx-auto">
-                    <% for(var i = 0; i < todoList.length; i++) { %>
-                        <li> <%= todoList[i].name %> </li>
-                    <% } %>
-                </ul>
+        <div>
+            <h1>Enter Todo Item</h1>
+            <!-- input form -->
+            <form action="/newtodo"  method="POST">
+                <div>
+                    <input type="text" name="item" placeholder="Enter Todo Item"
+                    value="this is a new todo list item">
+                    <span>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </span>
+                </div>
+            </form>
+            <div>
+                <div class="needTodo">
+                    <h2>ToDo</h2>
+                    <form action = "/completeItem" method="POST">
+                        <ul>
+                            <% for(var i = 0; i < todoList.length; i++) { %>
+                                <% if(todoList[i].done === false) { %>
+                                    <li>
+                                        <input type = "checkbox" name = "check[]" value = "<%= todoList[i].name %>" /> <%= todoList[i].name %>
+                                    </li>
+                                <% } %>
+                            <% } %>
+                        </ul>
+                    
+                        <button type="submit">Done</button>
+                    </form>
+                </div>
+
+                <div class="donetodo">
+                    <h2>Completed</h2>
+                    <ul>
+                        <% for(var i = 0; i < todoList.length; i++) { %>
+                            <% if(todoList[i].done === true) { %>
+                                <li>
+                                    <s><%= todoList[i].name %></s>
+                                </li>
+                            <% } %>
+                        <% } %>
+                    </ul>
+                </div>
+               
             </div>
         </div>
 
-       </body>
+    </body>
 
 </html>

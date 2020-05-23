@@ -3,7 +3,8 @@ var Schema = mongoose.Schema;
 
 //Mongoose schema
 var todoSchema = new mongoose.Schema({
-    name: String
+    name: String,
+    done: Boolean
 });
 
 
